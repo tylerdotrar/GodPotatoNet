@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2AE886C3-3272-40BE-8D3C-EBAEDE9E61E1}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GodPotato</RootNamespace>
-    <AssemblyName>GodPotato</AssemblyName>
+    <RootNamespace>GodPotatoNet</RootNamespace>
+    <AssemblyName>GodPotatoNet</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -39,8 +39,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgsParse.cs" />
-    <Compile Include="NativeAPI\GodPotatoContext.cs" />
-    <Compile Include="NativeAPI\GodPotatoUnmarshalTrigger.cs" />
+    <Compile Include="NativeAPI\GodPotatoNetContext.cs" />
+    <Compile Include="NativeAPI\GodPotatoNetUnmarshalTrigger.cs" />
     <Compile Include="NativeAPI\IStreamImpl.cs" />
     <Compile Include="NativeAPI\NativeMethods.cs" />
     <Compile Include="NativeAPI\ObjRef.cs" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-namespace GodPotato
+namespace GodPotatoNet
 {
     internal class ArgsParse
     {
@@ -82,6 +82,7 @@ namespace GodPotato
             propertyInfo.SetValue(obj, valueObj, null);
 
         }
+
         public static T ParseArgs<T>(string[] args)
         {
             Type type = typeof(T);
@@ -133,6 +134,7 @@ namespace GodPotato
 
             return (T)value;
         }
+
         public static string PrintHelp(Type type,string head,string appName, string[] examples) {;
             Type argsAttributeType = typeof(ArgsAttribute);
             object value = type.GetConstructor(new Type[0]).Invoke(new object[0]);
@@ -154,23 +156,21 @@ namespace GodPotato
 
             StringWriter stringBuilder = new StringWriter();
             stringBuilder.WriteLine(head);
-            stringBuilder.WriteLine();
+            //stringBuilder.WriteLine();
             stringBuilder.WriteLine("Arguments:");
-            stringBuilder.WriteLine();
+            //stringBuilder.WriteLine();
             foreach (var argsAttribute in propertyInfoList)
             {
                 stringBuilder.WriteLine("\t-{0} Required:{1} {2} (default {3})", argsAttribute.FieldName, argsAttribute.Required, argsAttribute.Description, argsAttribute.DefaultValue); 
             }
             stringBuilder.WriteLine();
-            stringBuilder.WriteLine("Example:");
-            stringBuilder.WriteLine();
+            stringBuilder.WriteLine("Examples:");
+            //stringBuilder.WriteLine();
             foreach (string example in examples)
             {
                 stringBuilder.WriteLine(example);
             }
-
             
-
             if (requiredPropertyList.Count > 0)
             {
                 string requiredExample = "";
@@ -186,8 +186,11 @@ namespace GodPotato
                         requiredExample += string.Format("-{0} {1} ", argsAttribute.FieldName, argsAttribute.DefaultValue);
                     }
                 }
-                stringBuilder.WriteLine(requiredExample); ;
+                // GodPotatoNet
+                stringBuilder.WriteLine("(1) " + requiredExample); ;
             }
+            // GodPotatoNet
+            stringBuilder.WriteLine("(2) [GodPotatoNet.Program]::Main(@('-cmd','powershell -c whoami'))");
 
             if (propertyInfoList.Count > 0 && requiredPropertyList.Count != propertyInfoList.Count)
             {
@@ -206,8 +209,6 @@ namespace GodPotato
                 }
                 stringBuilder.WriteLine(allParameterExample); ;
             }
-
-
 
             return stringBuilder.ToString(); 
         }

