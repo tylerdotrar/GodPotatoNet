@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace GodPotato.NativeAPI
+namespace GodPotatoNet.NativeAPI
 {
     internal class UnmarshalDCOM
     {

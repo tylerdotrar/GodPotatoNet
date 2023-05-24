@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Security.Principal;
 using System.Text;
 
-namespace GodPotato.NativeAPI
+namespace GodPotatoNet.NativeAPI
 {
     public class NativeMethods
     {

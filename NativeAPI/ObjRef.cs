@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace GodPotato.NativeAPI{
+namespace GodPotatoNet.NativeAPI{
 
     public enum TowerProtocol : ushort {
         EPM_PROTOCOL_DNET_NSP = 0x04,
