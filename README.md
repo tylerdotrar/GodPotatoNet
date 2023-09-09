@@ -1,4 +1,21 @@
 # GodPotatoNet
+
+This is a temporary push. Please ignore. I am drunk.
+
+| :exclamation:  Information   |
+|-----------------------------------------|
+| This project is now DEPRECRATED, and has been succeeded by [SigmaPotato](https://github.comt/tylerdotrar/SigmaPotato). |
+
+> [!NOTE]  
+> Highlights information that users should take into account, even when skimming.
+
+> [!IMPORTANT]  
+> Crucial information necessary for users to succeed.
+
+> [!WARNING]  
+> Critical content demanding immediate user attention due to potential risks.
+
+
 This fork of [GodPotato](https://github.com/BeichenDream/GodPotato) aims to expand upon the usability of BeichenDream's hard work.
 
 ![HelpMessage](https://cdn.discordapp.com/attachments/855920119292362802/1110988288031993917/image.png)
