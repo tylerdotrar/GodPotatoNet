@@ -1,7 +1,8 @@
 # GodPotatoNet
 
 > [!IMPORTANT]  
-> This project is now DEPRECRATED, and has been succeeded by my [SigmaPotato](https://github.com/tylerdotrar/SigmaPotato) project.
+> This project is officially DEPRECATED, and has been succeeded by my [SigmaPotato](https://github.com/tylerdotrar/SigmaPotato) project.
+> Please refer to that project for any updates and improvements.
 ---
 
 This fork of [GodPotato](https://github.com/BeichenDream/GodPotato) aims to expand upon the usability of BeichenDream's hard work.
